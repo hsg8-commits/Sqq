@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Admin Panel Initialization Script
+ * Admin Panel Initialization Script 
  * لوحة التحكم الإدارية - سكريبت التهيئة الأولية
  * 
  * This script sets up the admin panel with:
