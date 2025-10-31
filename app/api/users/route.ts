@@ -5,6 +5,10 @@ import Message from '@/lib/models/Message';
 import Room from '@/lib/models/Room';
 import { authenticate, authorize, logAdminAction, validateInput, withErrorHandling } from '@/lib/middleware';
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 export const GET = withErrorHandling(async (req: NextRequest) => {
   await connectDB();
   const admin = await authenticate(req);

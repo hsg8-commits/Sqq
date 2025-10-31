@@ -7,6 +7,10 @@ import Media from '@/lib/models/Media';
 import Report from '@/lib/models/Report';
 import { authenticate, authorize, logAdminAction, withErrorHandling } from '@/lib/middleware';
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 export const GET = withErrorHandling(async (
   req: NextRequest,
   { params }: { params: { id: string } }

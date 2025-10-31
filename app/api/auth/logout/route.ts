@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { authenticate, logAdminAction, withErrorHandling } from '@/lib/middleware';
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 export const POST = withErrorHandling(async (req: NextRequest) => {
   // Get current admin if authenticated
   let admin = null;

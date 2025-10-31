@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import { authenticate, logAdminAction, withErrorHandling, validateInput } from '@/lib/middleware';
 import { generate2FASecret, verify2FAToken } from '@/lib/auth';
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 export const POST = withErrorHandling(async (req: NextRequest) => {
   const admin = await authenticate(req);
   const body = await req.json();

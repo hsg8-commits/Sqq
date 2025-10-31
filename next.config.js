@@ -12,6 +12,8 @@ const nextConfig = {
       },
     ],
   },
+  // Disable static export for API routes
+  output: undefined,
   env: {
     MONGODB_URI: process.env.MONGODB_URI,
     JWT_SECRET: process.env.JWT_SECRET,
