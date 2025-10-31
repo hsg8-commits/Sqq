@@ -108,13 +108,13 @@ export const PATCH = withErrorHandling(async (req: NextRequest) => {
 
   let result = null;
   let actionType = '';
+  let updates: Record<string, any> = {};
 
   switch (action) {
     case 'update':
       await authorize('users', 'edit')(req);
       
       const allowedFields = ['name', 'lastName', 'username', 'biography', 'avatar'];
-      const updates = {};
       
       Object.keys(updateData).forEach(key => {
         if (allowedFields.includes(key) && updateData[key] !== undefined) {

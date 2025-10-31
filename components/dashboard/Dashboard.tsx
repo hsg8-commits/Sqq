@@ -7,11 +7,9 @@ import {
   MessageOutlined,
   TeamOutlined,
   DatabaseOutlined,
-  FlagOutlined,
-  TrendingUpOutlined,
-  TrendingDownOutlined,
   EyeOutlined,
 } from '@ant-design/icons';
+import { RiseOutlined, FallOutlined } from '@ant-design/icons';
 import { useQuery } from 'react-query';
 import axios from '@/lib/axios';
 import StatsChart from './StatsChart';
@@ -103,8 +101,8 @@ const Dashboard: React.FC = () => {
 
   const getGrowthIcon = (percentage: string) => {
     const num = parseFloat(percentage);
-    if (num > 0) return <TrendingUpOutlined style={{ color: '#52c41a' }} />;
-    if (num < 0) return <TrendingDownOutlined style={{ color: '#f5222d' }} />;
+    if (num > 0) return <RiseOutlined style={{ color: '#52c41a' }} />;
+    if (num < 0) return <FallOutlined style={{ color: '#f5222d' }} />;
     return <EyeOutlined style={{ color: '#faad14' }} />;
   };
 

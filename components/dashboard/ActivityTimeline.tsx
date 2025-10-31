@@ -139,7 +139,7 @@ const ActivityTimeline: React.FC = () => {
 
   return (
     <div className="max-h-60 overflow-y-auto">
-      <Timeline items={timelineItems} mode="left" size="small" />
+      <Timeline items={timelineItems} mode="left" />
       
       {activities.length === 0 && (
         <div className="text-center py-8 text-gray-400">

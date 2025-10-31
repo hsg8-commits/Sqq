@@ -20,7 +20,7 @@ export const GET = withErrorHandling(async (
   // Get user details
   const user = await User.findById(userId)
     .select('-password -roomMessageTrack')
-    .lean();
+    .lean() as any;
 
   if (!user) {
     throw new Error('المستخدم غير موجود');
@@ -181,7 +181,8 @@ export const DELETE = withErrorHandling(async (
   }
 
   // Start transaction
-  const session = await connectDB().startSession();
+  await connectDB();
+  const session = await User.startSession();
   session.startTransaction();
 
   try {

@@ -137,7 +137,6 @@ const RecentReports: React.FC = () => {
                     </Text>
                     <Tag 
                       color={getPriorityColor(report.priority)}
-                      size="small"
                     >
                       {getPriorityLabel(report.priority)}
                     </Tag>
