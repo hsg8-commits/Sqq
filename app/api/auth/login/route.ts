@@ -28,12 +28,11 @@ export const POST = withErrorHandling(async (req: NextRequest) => {
     ]
   });
 
-  // قم بتعديل السطر 32 ليصبح:
   if (!admin) {
-    await logAdminAction(null, 'ADMIN_LOGIN', username, null, {}, false, 'Admin not found', req); // تم تغيير 'Admin' إلى null
+    // تم إصلاح خطأ النوع هنا: تغيير 'Admin' إلى null في الوسيط الرابع
+    await logAdminAction(null, 'ADMIN_LOGIN', username, null, {}, false, 'Admin not found', req);
     throw new Error('اسم المستخدم أو كلمة المرور غير صحيحة');
   }
-
 
   // Check if account is locked
   if (isAccountLocked(admin)) {
