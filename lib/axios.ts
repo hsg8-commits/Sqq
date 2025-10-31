@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002',
+  baseURL: process.env.NEXT_PUBLIC_API_URL || 'https://sqq-virid.vercel.app',
   timeout: 30000,
   withCredentials: true,
 });
