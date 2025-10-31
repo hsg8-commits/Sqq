@@ -42,15 +42,27 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
   const { data, isLoading, error } = useQuery(
     'admin-profile',
     async () => {
-      const response = await axios.get('/api/auth/profile');
-      return response.data;
+      try {
+        const response = await axios.get('/api/auth/profile');
+        return response.data;
+      } catch (error: any) {
+        // If it's a 401, it just means user is not logged in
+        if (error.response?.status === 401) {
+          return { success: false, admin: null };
+        }
+        throw error;
+      }
     },
     {
       retry: false,
       staleTime: 5 * 60 * 1000, // 5 minutes
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
       onSuccess: (data) => {
-        if (data.success && data.admin) {
+        if (data?.success && data.admin) {
           setAdmin(data.admin);
+        } else {
+          setAdmin(null);
         }
       },
       onError: () => {

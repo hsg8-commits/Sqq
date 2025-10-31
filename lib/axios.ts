@@ -1,9 +1,13 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'https://sqq-virid.vercel.app',
+  // Use relative URLs to work with any domain (Vercel preview URLs, production, etc)
+  baseURL: typeof window !== 'undefined' ? window.location.origin : '',
   timeout: 30000,
   withCredentials: true,
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
 // Request interceptor
@@ -23,9 +27,10 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (error.response?.status === 401) {
-      // Redirect to login if unauthorized
-      if (typeof window !== 'undefined') {
+    // Don't redirect on 401 for profile check - let the component handle it
+    // Only redirect for other authenticated requests
+    if (error.response?.status === 401 && !error.config.url?.includes('/api/auth/profile')) {
+      if (typeof window !== 'undefined' && window.location.pathname !== '/') {
         window.location.href = '/';
       }
     }
