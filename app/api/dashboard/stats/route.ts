@@ -7,6 +7,9 @@ import Media from '@/lib/models/Media';
 import Report from '@/lib/models/Report';
 import { authenticate, authorize, withErrorHandling } from '@/lib/middleware';
 
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 export const GET = withErrorHandling(async (req: NextRequest) => {
   await connectDB();
   const admin = await authenticate(req);
