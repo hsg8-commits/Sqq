@@ -57,8 +57,10 @@ export async function POST(req: NextRequest) {
       }, { status: 400 });
     }
     
-    // Find admin
-    const admin = await Admin.findOne({ username: username.toLowerCase() });
+    // Find admin (case-insensitive search)
+    const admin = await Admin.findOne({ 
+      username: { $regex: new RegExp(`^${username}$`, 'i') } 
+    });
     
     if (!admin) {
       return NextResponse.json({

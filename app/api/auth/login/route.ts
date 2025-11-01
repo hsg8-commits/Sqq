@@ -17,6 +17,9 @@ import {
   getClientIP
 } from '@/lib/middleware';
 
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 const loginSchema = {
   username: { required: true, type: 'string', minLength: 3 },
   password: { required: true, type: 'string', minLength: 6 },
@@ -32,11 +35,11 @@ export const POST = withErrorHandling(async (req: NextRequest) => {
 
   const { username, password, twoFactorToken, rememberMe } = body;
 
-  // البحث عن الأدمن عبر اسم المستخدم أو البريد الإلكتروني
+  // البحث عن الأدمن عبر اسم المستخدم أو البريد الإلكتروني (case-insensitive)
   const admin = await Admin.findOne({
     $or: [
-      { username: username.toLowerCase() },
-      { email: username.toLowerCase() }
+      { username: { $regex: new RegExp(`^${username}$`, 'i') } },
+      { email: { $regex: new RegExp(`^${username}$`, 'i') } }
     ]
   });
 
